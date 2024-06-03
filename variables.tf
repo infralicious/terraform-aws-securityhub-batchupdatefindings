@@ -29,24 +29,7 @@ variable "findings" {
     confidence         = optional(number)
     criticality        = optional(number)
   }))
-  description = <<-EOF
-    The path of the YAML file starting with key "findings" and containing a list of items with at least an "id" and "note".
-
-    ```yaml
-    findings:
-      - id: "arn:..."
-        note:
-          text: "Suppressed because of these reasons"
-          # optional
-          updated_by: "terraform"
-        # optional
-        workflow:
-          status: SUPPRESSED
-        verification_state: UNKNOWN|TRUE_POSITIVE|FALSE_POSITIVE|BENIGN_POSITIVE
-        confidence: 0
-        criticality: 0
-    ```
-  EOF
+  description = "The list of findings to run the awscli command on."
 }
 
 variable "note_suffix" {

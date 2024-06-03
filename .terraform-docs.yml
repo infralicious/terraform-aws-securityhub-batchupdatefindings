@@ -1,0 +1,46 @@
+# https://terraform-docs.io/user-guide/configuration/
+
+formatter: "markdown"
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+
+recursive:
+  enabled: false
+  path: modules
+  include-main: true
+
+sections:
+  hide: []
+  show: []
+
+content: ""
+
+output:
+  file: "README.md"
+  mode: inject
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: true
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true

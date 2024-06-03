@@ -1,0 +1,62 @@
+variable "default_product_arn" {
+  type        = string
+  description = "The default product ARN for each finding. This can be overridden using the key `product_arn`."
+}
+
+variable "default_workflow" {
+  type        = string
+  description = "The default workflow for each finding. This can be overridden using the key `workflow`."
+  default     = "SUPPRESSED"
+}
+
+variable "default_note_updated_by" {
+  type        = string
+  description = "The default UpdatedBy for each finding for its note if a note is provided. This can be overridden using the key `note_updatedby`."
+  default     = "terraform"
+}
+
+variable "findings" {
+  type        = list(object({
+    id = string
+    note = object({
+      text = string
+      updated_by = string
+    })
+    workflow = object({
+      status = string
+    })
+    verification_state = optional(string)
+    confidence = optional(number)
+    criticality = optional(number)
+  }))
+  description = <<-EOF
+    The path of the YAML file starting with key "findings" and containing a list of items with at least an "id" and "note".
+
+    ```yaml
+    findings:
+      - id: "arn:..."
+        note:
+          text: "Suppressed because of these reasons"
+          # optional
+          updated_by: "terraform"
+        # optional
+        workflow:
+          status: SUPPRESSED
+        verification_state: UNKNOWN|TRUE_POSITIVE|FALSE_POSITIVE|BENIGN_POSITIVE
+        confidence: 0
+        criticality: 0
+    ```
+  EOF
+}
+
+variable "note_suffix" {
+  type        = string
+  default     = ""
+  description = "Add a suffix to each note."
+}
+
+variable "dryrun_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether or not to add an echo before the command to verify the commands prior to applying."
+}

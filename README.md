@@ -27,8 +27,8 @@ findings:
   # Every finding should have an adequate note for the suppression.
   # A single resource can have multiple findings.
   # We can codify the resource either in the note or in an inline comment.
-  - id: "arn:aws:securityhub:us-east-1:<snip>>:subscription/aws-foundational-security-best-practices/v/1.0.0/S3.11/finding/e4c171dc-12e6-433b-8a51-a382e8d24e37"
-    product_arn: "arn:aws:securityhub:us-east-1:<snip>:product/<snip>/default"
+  - id: "arn:aws:securityhub:us-east-1:ACCOUNTID:subscription/aws-foundational-security-best-practices/v/1.0.0/S3.11/finding/e4c171dc-12e6-433b-8a51-a382e8d24e37"
+    product_arn: "arn:aws:securityhub:us-east-1:ACCOUNTID:product/ACCOUNTID/default"
     note:
       text: "INFOSEC-1234: Suppressed since public IP ingress is for data partner"
     workflow:

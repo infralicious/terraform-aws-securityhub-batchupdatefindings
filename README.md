@@ -12,8 +12,9 @@ module "securityhub_batch_update_findings" {
   # It's recommended to pin every module to a specific version
   # version = "x.x.x"
 
-  findings            = yamldecode("${path.module}/findings.yaml").findings
+  findings            = yamldecode(file("${path.module}/findings.yaml")).findings
   default_product_arn = "arn:aws:securityhub:us-east-1:<snip>:product/<snip>/default"
+  default_workflow    = "SUPPRESSED"
   note_suffix         = "\n\nAdded using terraform"
 }
 ```

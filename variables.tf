@@ -16,18 +16,18 @@ variable "default_note_updated_by" {
 }
 
 variable "findings" {
-  type        = list(object({
+  type = list(object({
     id = string
     note = object({
-      text = string
-      updated_by = string
+      text       = string
+      updated_by = optional(string)
     })
     workflow = object({
       status = string
     })
     verification_state = optional(string)
-    confidence = optional(number)
-    criticality = optional(number)
+    confidence         = optional(number)
+    criticality        = optional(number)
   }))
   description = <<-EOF
     The path of the YAML file starting with key "findings" and containing a list of items with at least an "id" and "note".

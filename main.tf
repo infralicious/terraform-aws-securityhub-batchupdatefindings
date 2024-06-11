@@ -17,12 +17,13 @@ resource "null_resource" "default" {
       join(" \\ \n  ", compact([
         format("--finding-identifiers Id=%s,ProductArn=%s",
           each.value["id"],
-        try(each.value["product_arn"], var.default_product_arn)),
+          coalesce(each.value["product_arn"], var.default_product_arn)
+        ),
         try(length(each.value["note"]["text"]), 0) > 0 || length(var.note_suffix) > 0 ? format(
           "--note Text=\"%s%s\",UpdatedBy=%s",
           replace(each.value["note"]["text"], "\"", "'"),
           var.note_suffix,
-          try(length(each.value["note"]["updated_by"]), 0) > 0 ? each.value["note"]["updated_by"] : var.default_note_updated_by
+          coalesce(each.value["note"]["updated_by"], var.default_note_updated_by)
         ) : "",
         try(length(each.value["workflow"]["status"]), 0) > 0 ? format(
           "--workflow Status=\"%s\"", each.value["workflow"]["status"]

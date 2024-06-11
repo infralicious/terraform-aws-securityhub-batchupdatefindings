@@ -8,7 +8,7 @@ Example of module usage
 
 ```hcl
 module "securityhub_batch_update_findings" {
-  source  = "securityhub/batchupdatefindings/aws"
+  source  = "infralicious/securityhub-batchupdatefindings/aws"
   # It's recommended to pin every module to a specific version
   # version = "x.x.x"
 

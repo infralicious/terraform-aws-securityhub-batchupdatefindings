@@ -25,7 +25,7 @@ variable "findings" {
     workflow = object({
       status = string
     })
-    product_arn        = optional(product_arn)
+    product_arn        = optional(string)
     verification_state = optional(string)
     confidence         = optional(number)
     criticality        = optional(number)

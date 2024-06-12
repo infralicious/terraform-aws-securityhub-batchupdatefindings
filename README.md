@@ -32,7 +32,7 @@ findings:
     note:
       text: "INFOSEC-1234: Suppressed since public IP ingress is for data partner"
     workflow:
-      status: "SUPPRESED"
+      status: "SUPPRESSED"
 ```
 
 ## Misc

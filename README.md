@@ -56,6 +56,14 @@ aws securityhub get-findings \
   }' | yq -P . > findings.yaml
 ```
 
+### Test
+
+1. Run a plan
+1. Retrieve the existing suppression for a specific finding
+1. Use `terraform apply -target` to suppress and add a note to the same finding
+1. Repeat the previous retrieval to see the new result
+1. Compare with the old result and see if there are differences
+
 ### Compare the counts between suppressions and codified suppressions
 
 This will give the count of suppressions in aws.

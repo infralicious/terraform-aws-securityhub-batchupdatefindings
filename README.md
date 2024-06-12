@@ -79,7 +79,7 @@ If the counts differ, then the clickops'ed suppression(s) can be moved to the ya
 If the `findings.yaml` file is too long, consider breaking it up by each control.
 
 ```bash
-~ tree findings
+~ tree findings/
 findings
 ├── EC2.1.yaml
 ├── EC2.2.yaml
@@ -146,5 +146,7 @@ module "securityhub_batch_update_findings" {
 
 ## References
 
-* https://ekantmate.medium.com/how-to-suppress-particular-findings-in-aws-security-hub-using-terraform-558bd3819b31
-* https://github.com/hashicorp/terraform-provider-aws/issues/29164
+- https://ekantmate.medium.com/how-to-suppress-particular-findings-in-aws-security-hub-using-terraform-558bd3819b31
+- https://github.com/hashicorp/terraform-provider-aws/issues/29164
+- https://registry.terraform.io/modules/infralicious/securityhub-batchupdatefindings/aws
+- https://library.tf/modules/infralicious/securityhub-batchupdatefindings/aws/latest

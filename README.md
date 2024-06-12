@@ -13,7 +13,7 @@ module "securityhub_batch_update_findings" {
   # version = "x.x.x"
 
   findings            = yamldecode(file("${path.module}/findings.yaml")).findings
-  default_product_arn = "arn:aws:securityhub:us-east-1:<snip>:product/<snip>/default"
+  default_product_arn = "arn:aws:securityhub:us-east-1:ACCOUNTID:product/ACCOUNTID/default"
   default_workflow    = "SUPPRESSED"
   note_suffix         = "\n\nAdded using terraform"
 }
@@ -63,6 +63,8 @@ findings:
 |------|-------------|------|---------|:--------:|
 | <a name="input_default_product_arn"></a> [default\_product\_arn](#input\_default\_product\_arn) | The default product ARN for each finding. This can be overridden using the key `product_arn`. | `string` | n/a | yes |
 | <a name="input_findings"></a> [findings](#input\_findings) | The list of findings to run the awscli command on. | <pre>list(object({<br>    id = string<br>    note = object({<br>      text       = string<br>      updated_by = optional(string)<br>    })<br>    workflow = object({<br>      status = string<br>    })<br>    product_arn        = optional(string)<br>    verification_state = optional(string)<br>    confidence         = optional(number)<br>    criticality        = optional(number)<br>  }))</pre> | n/a | yes |
+| <a name="input_awscli_additional_arguments"></a> [awscli\_additional\_arguments](#input\_awscli\_additional\_arguments) | n/a | `string` | `""` | no |
+| <a name="input_awscli_command"></a> [awscli\_command](#input\_awscli\_command) | n/a | `string` | `"aws"` | no |
 | <a name="input_default_note_updated_by"></a> [default\_note\_updated\_by](#input\_default\_note\_updated\_by) | The default UpdatedBy for each finding for its note if a note is provided. This can be overridden using the key `note_updatedby`. | `string` | `"terraform"` | no |
 | <a name="input_default_workflow"></a> [default\_workflow](#input\_default\_workflow) | The default workflow for each finding. This can be overridden using the key `workflow`. | `string` | `"SUPPRESSED"` | no |
 | <a name="input_dryrun_enabled"></a> [dryrun\_enabled](#input\_dryrun\_enabled) | Whether or not to add an echo before the command to verify the commands prior to applying. | `bool` | `false` | no |

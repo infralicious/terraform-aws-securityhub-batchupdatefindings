@@ -39,6 +39,18 @@ variable "note_suffix" {
   description = "Add a suffix to each note."
 }
 
+variable "awscli_additional_arguments" {
+  type        = string
+  default     = ""
+  description = ""
+}
+
+variable "awscli_command" {
+  type        = string
+  default     = "aws"
+  description = ""
+}
+
 variable "dryrun_enabled" {
   type        = bool
   default     = false

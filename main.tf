@@ -1,7 +1,6 @@
 locals {
   template_command = <<-EOF
-      ${var.dryrun_enabled ? "echo" : ""} aws securityhub batch-update-findings \
-        %s
+      ${var.dryrun_enabled ? "echo" : ""} %s securityhub batch-update-findings %s %s
     EOF
 }
 
@@ -14,17 +13,12 @@ resource "null_resource" "default" {
 
   triggers = {
     command = format(local.template_command,
-      join(" \\ \n  ", compact([
-        format("--finding-identifiers Id=%s,ProductArn=%s",
+      var.awscli_command,
+      join(" ", compact([
+        format("--finding-identifiers Id=\"%s\",ProductArn=\"%s\"",
           each.value["id"],
           coalesce(each.value["product_arn"], var.default_product_arn)
         ),
-        try(length(each.value["note"]["text"]), 0) > 0 || length(var.note_suffix) > 0 ? format(
-          "--note Text=\"%s%s\",UpdatedBy=%s",
-          replace(each.value["note"]["text"], "\"", "'"),
-          var.note_suffix,
-          coalesce(each.value["note"]["updated_by"], var.default_note_updated_by)
-        ) : "",
         try(length(each.value["workflow"]["status"]), 0) > 0 ? format(
           "--workflow Status=\"%s\"", each.value["workflow"]["status"]
         ) : "",
@@ -37,12 +31,19 @@ resource "null_resource" "default" {
         try(length(each.value["criticality"]), 0) > 0 ? format(
           "--criticality %s", each.value["criticality"]
         ) : "",
+        try(length(each.value["note"]["text"]), 0) > 0 || length(var.note_suffix) > 0 ? format(
+          "--note Text=\"%s%s\",UpdatedBy=\"%s\"",
+          replace(each.value["note"]["text"], "\"", "'"),
+          var.note_suffix,
+          coalesce(each.value["note"]["updated_by"], var.default_note_updated_by)
+        ) : "",
         # TODO: None of these are needed at the moment
         # --related-findings
         # --severity
         # --types
         # --user-defined-fields
-      ]))
+      ])),
+      var.awscli_additional_arguments,
     )
   }
 }

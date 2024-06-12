@@ -113,6 +113,7 @@ module "securityhub_batch_update_findings" {
   # version = "x.x.x"
 
   findings            = local.findings
+  # ...
 }
 ```
 

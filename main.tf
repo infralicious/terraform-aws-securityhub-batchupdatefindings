@@ -33,7 +33,8 @@ resource "null_resource" "default" {
         ) : "",
         try(length(each.value["note"]["text"]), 0) > 0 || length(var.note_suffix) > 0 ? format(
           "--note Text=\"%s%s\",UpdatedBy=\"%s\"",
-          replace(each.value["note"]["text"], "\"", "'"),
+          # escape commas and escape double quotations
+          replace(replace(each.value["note"]["text"], ",", "\\,"), "\"", "'"),
           var.note_suffix,
           coalesce(each.value["note"]["updated_by"], var.default_note_updated_by)
         ) : "",

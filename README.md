@@ -135,7 +135,9 @@ module "securityhub_batch_update_findings" {
   # It's recommended to pin every module to a specific version
   # version = "x.x.x"
 
-  findings            = local.findings
+  for_each = local.findings
+
+  findings = yamldecode(file(each.key)).findings
   # ...
 }
 ```
